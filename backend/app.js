@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const userRoutes = require('./routes/user');
+const bookRoutes = require('./routes/book');
+const path = require('path');
 
 
 
@@ -23,5 +25,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/auth/', userRoutes);
+app.use('/api/books', bookRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
