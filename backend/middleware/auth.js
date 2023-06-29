@@ -8,11 +8,8 @@ module.exports = (req, res, next) => {
         req.auth = {
             userId: userId
         };
-        if (req.params.userId && req.params.userId !== req.userId) {
-            throw new Error('Unauthorized request')
-        }
         next();
     } catch (error) {
-        res.status(403).json({ error: error.message });
+        res.status(403).json({ error });
     }
 };
