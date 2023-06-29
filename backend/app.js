@@ -6,6 +6,8 @@ const app = express();
 const userRoutes = require('./routes/user');
 const bookRoutes = require('./routes/book');
 const path = require('path');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 
 
@@ -22,6 +24,11 @@ app.use((req, res, next) => {
     next();
 });
 
+
+app.use(mongoSanitize());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/auth/', userRoutes);
