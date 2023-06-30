@@ -26,9 +26,8 @@ app.use((req, res, next) => {
 
 
 app.use(mongoSanitize());
-app.use(helmet({
-  crossOriginResourcePolicy: false,
-}));
+app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/auth/', userRoutes);
